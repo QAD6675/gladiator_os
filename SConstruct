@@ -40,7 +40,7 @@ VARS.Add("imageSize",
          converter=ParseSize)
 VARS.Add("toolchain", 
          help="Path to toolchain directory.",
-         default="toolchain")
+         default="../.toolchains")
 
 DEPS = {
     'binutils': '2.37',

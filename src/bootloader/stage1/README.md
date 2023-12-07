@@ -1,4 +1,4 @@
-# Nanobyte OS bootloader: Stage 1
+# gladiator OS bootloader: Stage 1
 
 The stage1 works in the following way:
 

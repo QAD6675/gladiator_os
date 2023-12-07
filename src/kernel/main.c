@@ -26,8 +26,8 @@ void start(uint16_t bootDrive)
     log_warn("Main", "This is a warning msg!");
     log_err("Main", "This is an error msg!");
     log_crit("Main", "This is a critical msg!");
-    printf("Nanobyte OS v0.1\n");
-    printf("This operating system is under construction.\n");
+    printf("gladiator OS v0.1\n");
+    printf("This operating system is under construction.\n sorry no terminal for ya\n");
     //i686_IRQ_RegisterHandler(0, timer);
 
     //crash_me();
