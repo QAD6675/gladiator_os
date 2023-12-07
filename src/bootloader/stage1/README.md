@@ -30,5 +30,6 @@ The stage1 works in the following way:
 
 * performs a far jump to the entry point, passing the following arguments:
 
-    * **DL** contains the boot disk number
-    * **ES:DI** contains a pointer to the MBR entry of the partition
+  * **DL** contains the boot disk number
+  * **ES:DI** contains a pointer to the MBR entry of the partition
+  
