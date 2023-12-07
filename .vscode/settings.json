@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        "x86.h": "c",
+        "stdio.h": "c",
+        "io.h": "c",
+        "bitset": "c",
+        "algorithm": "c",
+        "hash_map": "c",
+        "hash_set": "c",
+        "format": "c",
+        "pic.h": "c",
+        "stdint.h": "c",
+        "compare": "c",
+        "cstdint": "c"
+    },
+    "C_Cpp.errorSquiggles": "enabled",
+    "editor.inlineSuggest.showToolbar": "always",
+}
