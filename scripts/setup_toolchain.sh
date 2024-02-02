@@ -12,7 +12,7 @@ TARGET=i686-elf
 
 set -e
 
-TOOLCHAINS_DIR='/home/qad7098/sources/.toolchains'
+TOOLCHAINS_DIR=
 OPERATION='build'
 
 while test $# -gt 0
@@ -20,7 +20,7 @@ do
     case "$1" in
         -c) OPERATION='clean'
             ;;
-        *)  TOOLCHAINS_DIR=$(realpath "$1")
+        *)  TOOLCHAINS_DIR="$1"
             ;;
     esac
     shift
@@ -31,7 +31,6 @@ if [ -z "$TOOLCHAINS_DIR" ]; then
     exit 1
 fi
 
-mkdir -p "$TOOLCHAINS_DIR"
 pushd "$TOOLCHAINS_DIR"
 TOOLCHAIN_PREFIX="$TOOLCHAINS_DIR/$TARGET"
 

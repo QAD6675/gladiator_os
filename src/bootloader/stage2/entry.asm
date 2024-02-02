@@ -6,7 +6,7 @@ extern __bss_start
 extern __end
 extern _init
 
-extern Start
+extern start
 global entry
 
 entry:
@@ -14,8 +14,8 @@ entry:
 
     ; save boot drive
     mov [g_BootDrive], dl
-    mov [g_BootPartitionOff], di
-    mov [g_BootPartitionSeg], es
+    mov [g_BootPartitionOff], si
+    mov [g_BootPartitionSeg], di
 
     ; setup stack
     mov ax, ds
@@ -64,7 +64,7 @@ entry:
     xor edx, edx
     mov dl, [g_BootDrive]
     push edx
-    call Start
+    call start
 
     cli
     hlt

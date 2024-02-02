@@ -25,12 +25,7 @@ VARS.AddVariables(
     EnumVariable("imageFS",
                  help="Type of image",
                  default="fat32",
-                 allowed_values=("fat12", "fat16", "fat32", "ext2")),
-
-    EnumVariable("mountMethod",
-                 help="Method to use for mounting image",
-                 default="guestfs",
-                 allowed_values=("guestfs", "mount"))
+                 allowed_values=("fat12", "fat16", "fat32", "ext2"))    
     )
 VARS.Add("imageSize", 
          help="The size of the image, will be rounded up to the nearest multiple of 512. " +
@@ -40,7 +35,7 @@ VARS.Add("imageSize",
          converter=ParseSize)
 VARS.Add("toolchain", 
          help="Path to toolchain directory.",
-         default="../.toolchains")
+         default="toolchain")
 
 DEPS = {
     'binutils': '2.37',
@@ -62,7 +57,7 @@ HOST_ENVIRONMENT = Environment(variables=VARS,
 )
 
 HOST_ENVIRONMENT.Append(
-    ROOTDIR = HOST_ENVIRONMENT.Dir('.').srcnode()
+    PROJECTDIR = HOST_ENVIRONMENT.Dir('.').srcnode()
 )
 
 if HOST_ENVIRONMENT['config'] == 'debug':
@@ -151,19 +146,16 @@ SConscript('src/bootloader/stage2/SConscript', variant_dir=variantDir + '/stage2
 SConscript('src/kernel/SConscript', variant_dir=variantDir + '/kernel', duplicate=0)
 SConscript('image/SConscript', variant_dir=variantDir, duplicate=0)
 
-Import('stage1', 'stage2', 'kernel', 'image')
-Default(stage1, stage2, kernel)
-HOST_ENVIRONMENT.Alias('image', image)
+Import('image')
+Default(image)
 
 # Phony targets
 PhonyTargets(HOST_ENVIRONMENT, 
              run=['./scripts/run.sh', HOST_ENVIRONMENT['imageType'], image[0].path],
              debug=['./scripts/debug.sh', HOST_ENVIRONMENT['imageType'], image[0].path],
-             debug_stage2=['./scripts/debug_stage2.sh', HOST_ENVIRONMENT['imageType'], image[0].path],
              bochs=['./scripts/bochs.sh', HOST_ENVIRONMENT['imageType'], image[0].path],
              toolchain=['./scripts/setup_toolchain.sh', HOST_ENVIRONMENT['toolchain']])
 
 Depends('run', image)
 Depends('debug', image)
-Depends('debug_stage2', image)
 Depends('bochs', image)

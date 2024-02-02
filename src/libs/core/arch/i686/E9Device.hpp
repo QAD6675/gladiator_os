@@ -1,4 +1,4 @@
-#include <core/dev/CharacterDevice.hpp>
+#include <dev/CharacterDevice.hpp>
 
 namespace arch {
 namespace i686 {
