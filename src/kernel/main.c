@@ -37,8 +37,9 @@ void start(BootParams* bootParams)
     log_warn("Main", "This is a warning msg!");
     log_err("Main", "This is an error msg!");
     log_crit("Main", "This is a critical msg!");
-    printf("Nanobyte OS v0.1\n");
+    printf("GLADIATOR OS v0.1\n");
     printf("This operating system is under construction.\n");
+    printf("made by abido \n");
     //i686_IRQ_RegisterHandler(0, timer);
 
     //crash_me();
