@@ -2,5 +2,5 @@
 #include "isr.h"
 
 
-int getKey(Registers* regs);
+void getKey(Registers* regs);
 void init_keyboard();
