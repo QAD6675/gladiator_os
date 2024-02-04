@@ -9,8 +9,6 @@
 
 extern void _init();
 
-void crash_me();
-
 void start(BootParams* bootParams)
 {   
     // call global constructors
@@ -36,9 +34,8 @@ void start(BootParams* bootParams)
     printf("GLADIATOR OS v0.1\n");
     printf("This operating system is under construction.\n");
     printf("made by abido \n");
-    i686_IRQ_RegisterHandler(1, getKey);
+    init_keyboard();
 
-    //crash_me();
 
 end:
     for (;;);
