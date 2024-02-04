@@ -3,17 +3,13 @@
 #include "memory.h"
 #include <hal/hal.h>
 #include <arch/i686/irq.h>
+#include <arch/i686/keyboard.h>
 #include <debug.h>
 #include <boot/bootparams.h>
 
 extern void _init();
 
 void crash_me();
-
-void timer(Registers* regs)
-{
-    printf(".");
-}
 
 void start(BootParams* bootParams)
 {   
@@ -40,7 +36,7 @@ void start(BootParams* bootParams)
     printf("GLADIATOR OS v0.1\n");
     printf("This operating system is under construction.\n");
     printf("made by abido \n");
-    //i686_IRQ_RegisterHandler(0, timer);
+    i686_IRQ_RegisterHandler(1, getKey);
 
     //crash_me();
 
