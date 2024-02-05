@@ -3,7 +3,6 @@
 #include "memory.h"
 #include <hal/hal.h>
 #include <arch/i686/irq.h>
-#include <arch/i686/keyboard.h>
 #include <debug.h>
 #include <boot/bootparams.h>
 
@@ -26,15 +25,10 @@ void start(BootParams* bootParams)
             bootParams->Memory.Regions[i].Type);
     }
 
-
-    log_info("Main", "This is an info msg!");
-    log_warn("Main", "This is a warning msg!");
-    log_err("Main", "This is an error msg!");
-    log_crit("Main", "This is a critical msg!");
     printf("GLADIATOR OS v0.1\n");
     printf("This operating system is under construction.\n");
-    printf("made by abido \n");
-    init_keyboard();
+    printf("made by qad7098 \n\n");
+    char *command = scanf("press enter to open ur terminal session:\n");
 
 
 end:

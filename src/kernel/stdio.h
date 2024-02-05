@@ -9,6 +9,10 @@ void vfprintf(fd_t file, const char* fmt, va_list args);
 void fprintf(fd_t file, const char* fmt, ...);
 void fprint_buffer(fd_t file, const char* msg, const void* buffer, uint32_t count);
 
+void inf(const char* fmt, ...);
+void cls();
+char* scanf(const char *fmt,...);
+
 void putc(char c);
 void puts(const char* str);
 void printf(const char* fmt, ...);

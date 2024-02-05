@@ -5,102 +5,111 @@
 #include "io.h"
 #include "isr.h"
 #include <stdio.h>
+#include <memory.h>
 #include "ascii.h"
 
 #define MAX_KEYB_BUFFER_SIZE    255
 
-int keyboard_buffer[MAX_KEYB_BUFFER_SIZE];
+char keyboard_buffer[MAX_KEYB_BUFFER_SIZE]={0};
 uint8_t buf_position = 0;
 
-typedef struct {
-        bool shift;
-        bool ctrl;
-        bool alt;
-        bool super;
-        bool caps;
-        bool none;
-        int last;
-}Kstate;
-
-Kstate state={
+Kbstate Kstate={
     .shift=false,
     .ctrl=false,
     .alt=false,
     .super=false,
     .caps=false,
-    .none=true,
+    .enabled=false,
     .last='\0'
 };
 
+bool toggleTyping(){
+    Kstate.enabled=!Kstate.enabled;
+    return Kstate.enabled;
+}
+
 void keyboard_irq(Registers* regs)
 {
+    if (!Kstate.enabled)return;
     int scancode = i686_inb(0x60); // Read byte from the Keyboard data port
-    int c=chars[scancode];
+    char c=translate(scancode);
+
+    if (Kstate.last == 9999){
+        Kstate.last =0;
+        return;
+    }
+    if(c == 127){
+        keyboard_buffer[(buf_position - 1) % MAX_KEYB_BUFFER_SIZE]='\0';
+    }
 
     switch(scancode){//disableing mods on key up
         case 219:
-            state.super=false;
-            if(state.shift==false &&state.alt==false && state.ctrl==false && state.super==false && state.caps==false){state.none=true;}
+            Kstate.super=false;
             return;
         case 184:
-            state.alt=false;
-            if(state.shift==false &&state.alt==false && state.ctrl==false && state.super==false && state.caps==false){state.none=true;}
+            Kstate.alt=false;
             return;
         case 157:
-            state.ctrl=false;
-            if(state.shift==false &&state.alt==false && state.ctrl==false && state.super==false && state.caps==false){state.none=true;}
+            Kstate.ctrl=false;
             return;
         case 170:
-            state.shift=false;
-            if(state.shift==false &&state.alt==false && state.ctrl==false && state.super==false && state.caps==false){state.none=true;}
+            Kstate.shift=false;
             return;
     }
-    if(scancode-128 == state.last){
+    if(scancode-128 == Kstate.last){
         return;
     }
         switch(c){
         case '%'://caps
-            state.caps=!state.caps;
-            state.none=false;
+            Kstate.caps=!Kstate.caps;
+            Kstate.last=9999;
             return;
         case '*'://alt 
-            state.alt=true;
-            state.none=false;
+            Kstate.alt=true;
             return; 
         case '@'://super 
-            state.super=true;
-            state.none=false;
+            Kstate.super=true;
             return;
         case '^'://ctrl 
-            state.ctrl=true;
-            state.none=false;
+            Kstate.ctrl=true;
             return;
         case '+'://shift
-            state.shift=true;
-            state.none=false;
+            Kstate.shift=true;
             return;
             }
-    if ((state.shift || state.caps) && !(state.caps==state.shift)){
+    if ((Kstate.shift || Kstate.caps) && !(Kstate.caps==Kstate.shift)){
         c-=32;
         keyboard_buffer[buf_position]= c;
         buf_position = (buf_position + 1) % MAX_KEYB_BUFFER_SIZE;      
-        putc(c);
     }else{//handling mods
-                keyboard_buffer[buf_position]= c;
-                buf_position = (buf_position + 1) % MAX_KEYB_BUFFER_SIZE;
-                putc(c);
+        keyboard_buffer[buf_position]= c;
+        buf_position = (buf_position + 1) % MAX_KEYB_BUFFER_SIZE;
+
     }
-    state.last=scancode;
+    Kstate.last=scancode;
     return;
 }
 
+void clearBuffer(){
+    for(size_t i = 0; i < sizeof keyboard_buffer; ++i){
+        keyboard_buffer[i] = 0;
+    }
+}
 void init_keyboard() {
     i686_IRQ_RegisterHandler(1, keyboard_irq);
-    state.shift=false;
-    state.ctrl=false;
-    state.alt=false;
-    state.super=false;
-    state.caps=false;
-    state.none=true;
-    state.last='\0';
+    Kstate.shift=false;
+    Kstate.ctrl=false;
+    Kstate.alt=false;
+    Kstate.super=false;
+    Kstate.caps=false;
+    Kstate.enabled=false;
+    Kstate.last='\0';
+    clearBuffer();
+}
+char** readBuffer(){
+    return &keyboard_buffer;
+}
+
+Kbstate KbgetState(){
+    return Kstate;
 }

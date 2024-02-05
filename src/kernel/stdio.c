@@ -1,9 +1,10 @@
+#include <arch/i686/vga_text.h>
 #include <stdio.h>
 #include <arch/i686/io.h>
-
+#include <arch/i686/keyboard.h>
 #include <stdarg.h>
 #include <stdbool.h>
-
+#include <arch/i686/ascii.h>
 #include <hal/vfs.h>
 
 void fputc(char c, fd_t file)
@@ -33,6 +34,7 @@ void fputs(const char* str, fd_t file)
 #define PRINTF_LENGTH_LONG_LONG     4
 
 const char g_HexChars[] = "0123456789abcdef";
+char g_buffer[255];
 
 void fprintf_unsigned(fd_t file, unsigned long long number, int radix)
 {
@@ -205,6 +207,18 @@ void fprintf(fd_t file, const char* fmt, ...)
     va_end(args);
 }
 
+void cls(){
+    VGA_clrscr();
+}
+
+char* scanf(const char* fmt , ...){
+    va_list args;
+    va_start(args, fmt);
+    vfprintf(VFS_FD_STDOUT, fmt, args);
+    va_end(args);
+    // TODO: plz add this
+}
+
 void fprint_buffer(fd_t file, const char* msg, const void* buffer, uint32_t count)
 {
     const uint8_t* u8Buffer = (const uint8_t*)buffer;
@@ -233,6 +247,12 @@ void printf(const char* fmt, ...)
     va_list args;
     va_start(args, fmt);
     vfprintf(VFS_FD_STDOUT, fmt, args);
+    va_end(args);
+}
+void inf(const char* fmt, ...){
+    va_list args;
+    va_start(args, fmt);
+    vfprintf(VFS_FD_STDIN, fmt, args);
     va_end(args);
 }
 
