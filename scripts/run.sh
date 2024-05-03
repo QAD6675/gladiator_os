@@ -16,4 +16,4 @@ case "$1" in
                 exit 2
 esac
 
-sudo -E qemu-system-i386 $QEMU_ARGS
+qemu-system-i386 $QEMU_ARGS
