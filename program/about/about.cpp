@@ -1,20 +1,20 @@
 /*
  * about program
  *
- * This file is part of PanicOS.
+ * This file is part of GLADIATOROS.
  *
- * PanicOS is free software: you can redistribute it and/or modify
+ * GLADIATOROS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * PanicOS is distributed in the hope that it will be useful,
+ * GLADIATOROS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with PanicOS.  If not, see <https://www.gnu.org/licenses/>.
+ * along with GLADIATOROS.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <array>
@@ -28,7 +28,7 @@
 #include <string>
 
 class AboutWindow : public GUI::Window {
-	GUI::Label about_label = "About PanicOS";
+	GUI::Label about_label = "About GLADIATOROS";
 	GUI::Label version_label = "alpha version";
 	GUI::Label license_label = "This is free software released under ";
 	GUI::Label license_label2 = "GNU General Public License version 3.";
@@ -41,7 +41,7 @@ class AboutWindow : public GUI::Window {
 
 public:
 	AboutWindow() : GUI::Window(400, 400) {
-		set_title("About PanicOS\n");
+		set_title("About GLADIATOROS\n");
 
 		about_label.x = 16;
 		about_label.y = 25;
@@ -95,7 +95,7 @@ public:
 };
 
 int main() {
-	std::cout << "PanicOS alpha version\n";
+	std::cout << "GLADIATOROS alpha version\n";
 	std::cout << "This is free software released under GNU General Public License "
 				 "version 3.\n";
 	std::cout << "Built on " __DATE__ " " __TIME__ << '\n';

@@ -1,23 +1,23 @@
 /*
  * exit function
  *
- * This file is part of PanicOS.
+ * This file is part of GLADIATOROS.
  *
- * PanicOS is free software: you can redistribute it and/or modify
+ * GLADIATOROS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * PanicOS is distributed in the hope that it will be useful,
+ * GLADIATOROS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with PanicOS.  If not, see <https://www.gnu.org/licenses/>.
+ * along with GLADIATOROS.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <panicos.h>
+#include <gladiatoros.h>
 
 void (*__libc_atexit_funcs[32])(void);
 int __libc_atexit_count = -1;

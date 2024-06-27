@@ -11,27 +11,27 @@ export LD= $(PREFIX)ld
 export OBJCOPY= $(PREFIX)objcopy
 export AR = $(PREFIX)ar
 
-all: panicos.img
+all: gladiatoros.img
 
-qemu: panicos.img
-	qemu-system-i386 -serial mon:stdio -kernel kernel/kernel -drive file=panicos.img,format=raw,if=virtio \
+qemu: gladiatoros.img
+	qemu-system-i386 -serial mon:stdio -kernel kernel/kernel -drive file=gladiatoros.img,format=raw,if=virtio \
 	-smp 2 -m 128 -net none -rtc base=localtime
 
-qemu-gdb: panicos.img
-	qemu-system-i386 -serial mon:stdio -kernel kernel/kernel -drive file=panicos.img,format=raw,if=virtio \
+qemu-gdb: gladiatoros.img
+	qemu-system-i386 -serial mon:stdio -kernel kernel/kernel -drive file=gladiatoros.img,format=raw,if=virtio \
 	-smp 2 -m 128 -s -S -net none -rtc base=localtime
 
-qemu-kvm: panicos.img
-	qemu-system-i386 -serial mon:stdio -kernel kernel/kernel -drive file=panicos.img,format=raw,if=virtio \
+qemu-kvm: gladiatoros.img
+	qemu-system-i386 -serial mon:stdio -kernel kernel/kernel -drive file=gladiatoros.img,format=raw,if=virtio \
 	-smp 2 -m 128 -accel kvm -cpu host -net none -rtc base=localtime
 
-panicos.img: boot/mbr.bin kernel/kernel rootfs program share module
+gladiatoros.img: boot/mbr.bin kernel/kernel rootfs program share module
 	dd if=/dev/zero of=fs.img bs=1M count=63
-	/sbin/mkfs.vfat -F32 -s1 -nPanicOS fs.img
+	/sbin/mkfs.vfat -F32 -s1 -nGLADIATOROS fs.img
 	mcopy -i fs.img -s rootfs/* ::
-	dd if=/dev/zero of=panicos.img bs=1M count=64
-	dd if=boot/mbr.bin of=panicos.img conv=notrunc
-	dd if=fs.img of=panicos.img bs=1M conv=notrunc seek=1
+	dd if=/dev/zero of=gladiatoros.img bs=1M count=64
+	dd if=boot/mbr.bin of=gladiatoros.img conv=notrunc
+	dd if=fs.img of=gladiatoros.img bs=1M conv=notrunc seek=1
 	rm -f fs.img
 
 boot/mbr.bin:
@@ -64,7 +64,7 @@ rootfs:
 
 .PHONY: dist
 dist: kernel/kernel rootfs program share module
-	tar -czf panicos.tar.gz rootfs/*
+	tar -czf gladiatoros.tar.gz rootfs/*
 
 .PHONY: clean
 clean:
@@ -73,4 +73,4 @@ clean:
 	$(MAKE) -C library clean
 	$(MAKE) -C program clean
 	$(MAKE) -C module clean
-	rm -rf panicos.img rootfs panicos.tar.gz
+	rm -rf gladiatoros.img rootfs gladiatoros.tar.gz

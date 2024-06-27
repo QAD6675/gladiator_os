@@ -1,20 +1,20 @@
 /*
  * main function of the kernel
  *
- * This file is part of PanicOS.
+ * This file is part of GLADIATOROS.
  *
- * PanicOS is free software: you can redistribute it and/or modify
+ * GLADIATOROS is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * PanicOS is distributed in the hope that it will be useful,
+ * GLADIATOROS is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with PanicOS.  If not, see <https://www.gnu.org/licenses/>.
+ * along with GLADIATOROS.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 #include <arch/x86/lapic.h>
@@ -53,7 +53,7 @@ struct BootGraphicsMode boot_graphics_mode;
 void kmain(uint32_t mb_sig, uint32_t mb_addr) {
 	kinit1(end, P2V(4 * 1024 * 1024)); // phys page allocator
 	kvmalloc(); // kernel page table
-	cprintf("PanicOS i686 alpha built on " __DATE__ " " __TIME__ " gcc " __VERSION__ "\n");
+	cprintf("GLADIATOROS i686 alpha built on " __DATE__ " " __TIME__ " gcc " __VERSION__ "\n");
 	if (mb_sig == 0x2BADB002 && mb_addr < 0x100000) {
 		cprintf("[multiboot] Multiboot bootloader detected, info at %x\n", mb_addr);
 		struct multiboot_info* mbinfo = P2V(mb_addr);
@@ -134,7 +134,7 @@ void kmain(uint32_t mb_sig, uint32_t mb_addr) {
 	cprintf("| |_) / _` | '_ \\| |/ __| | | \\___ \\ \n");
 	cprintf("|  __/ (_| | | | | | (__| |_| |___) |\n");
 	cprintf("|_|   \\__,_|_| |_|_|\\___|\\___/|____/ \n");
-	cprintf("Welcome to PanicOS pre-alpha version, this is free software licensed "
+	cprintf("Welcome to GLADIATOROS pre-alpha version, this is free software licensed "
 			"under GNU General Public License v3+\n");
 	// subsystems and HAL
 	kcall_init();
