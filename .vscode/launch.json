@@ -2,59 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "OS Debug",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceFolder}/build/i686_debug/kernel/kernel.elf",
-      "args": [],
-      "stopAtEntry": false,
-      "cwd": "${workspaceFolder}",
-      "environment": [],
-      "externalConsole": false,
-      "logging": {
-        "engineLogging": true
-      },
-      "MIMode": "gdb",
-      "setupCommands": [
-        {
-          "description": "Run script",
-          "text": "source ${workspaceFolder}/.vscode/.gdb_script.gdb",
-          "ignoreFailures": false
-        }
-      ],
-      "launchCompleteCommand": "None"
-    },
-    {
-      "name": "(gdb) tools/fat",
-      "type": "cppdbg",
-      "request": "launch",
-      "program": "${workspaceFolder}/build/tools/fat.out",
-      "args": [
-        "${workspaceFolder}/build/main_floppy.img",
-        "/mydir/bigtext.txt"
-      ],
-      "stopAtEntry": false,
-      "cwd": "${fileDirname}",
-      "environment": [],
-      "externalConsole": false,
-      "MIMode": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
-    },
-    {
       "name": "C/C++ Runner: Debug Session",
       "type": "cppdbg",
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
       "externalConsole": false,
-      "cwd": "/home/devil-7098/projs/gladiator_os/src/kernel",
-      "program": "/home/devil-7098/projs/gladiator_os/src/kernel/build/Debug/outDebug",
+      "cwd": "/home/devil-7098/projs/gladiator_os/kernel/hal",
+      "program": "/home/devil-7098/projs/gladiator_os/kernel/hal/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

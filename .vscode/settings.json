@@ -1,26 +1,10 @@
 {
-  "files.associations": {
-    "x86.h": "c",
-    "stdio.h": "c",
-    "io.h": "c",
-    "bitset": "c",
-    "algorithm": "c",
-    "hash_map": "c",
-    "hash_set": "c",
-    "format": "c",
-    "pic.h": "c",
-    "stdint.h": "c",
-    "compare": "c",
-    "cstdint": "c"
-  },
-  "C_Cpp.errorSquiggles": "enabled",
-  "editor.inlineSuggest.showToolbar": "always",
-  "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",
   "C_Cpp_Runner.cppCompilerPath": "g++",
   "C_Cpp_Runner.debuggerPath": "gdb",
   "C_Cpp_Runner.cStandard": "",
   "C_Cpp_Runner.cppStandard": "",
+  "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.useMsvc": false,
   "C_Cpp_Runner.warnings": [
     "-Wall",
