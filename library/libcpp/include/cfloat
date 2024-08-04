@@ -1,8 +1,0 @@
-// -*- c++ -*-
-
-#ifndef _LIBCPP_CFLOAT
-#define _LIBCPP_CFLOAT
-
-#include <float.h>
-
-#endif

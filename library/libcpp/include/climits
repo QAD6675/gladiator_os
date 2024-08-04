@@ -1,8 +1,0 @@
-// -*- c++ -*-
-
-#ifndef _LIBCPP_CLIMITS
-#define _LIBCPP_CLIMITS
-
-#include <limits.h>
-
-#endif

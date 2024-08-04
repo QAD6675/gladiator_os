@@ -1,8 +1,0 @@
-// -*- c++ -*-
-
-#ifndef _LIBCPP_CERRNO
-#define _LIBCPP_CERRNO
-
-extern int errno;
-
-#endif
